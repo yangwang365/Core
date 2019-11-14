@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mes.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Mes.Core.Controllers.ScanInfoesController.GetScaninfos">
+            <summary>
+            获取所有信息列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mes.Core.Controllers.ScanInfoesController.GetScanInfo(System.Int32)">
+            <summary>
+            根据id获取
+            </summary>
+            <param name="id">ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mes.Core.Controllers.ScanInfoesController.PutScanInfo(System.Int32,Model.ScanInfos)">
+            <summary>
+            修改指定信息
+            </summary>
+            <param name="id">ID</param>
+            <param name="scanInfo">ScanInfo对象实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mes.Core.Controllers.ScanInfoesController.PostScanInfo(Model.ScanInfos)">
+            <summary>
+            添加信息
+            </summary>
+            <param name="scanInfo">ScanInfo对象实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mes.Core.Controllers.ScanInfoesController.DeleteScanInfo(System.Int32)">
+            <summary>
+            删除制定信息
+            </summary>
+            <param name="id">ID</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
