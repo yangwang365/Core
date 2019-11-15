@@ -16,6 +16,7 @@ using Autofac;
 using System.Reflection;
 using Autofac.Extras.DynamicProxy;
 using CoreProject.API.AOP;
+using CoreProject.Common.CacheHelper;
 
 namespace CoreProject.API
 {
@@ -36,9 +37,10 @@ namespace CoreProject.API
         public void ConfigureServices(IServiceCollection services)
         {
             //BaseDBConfig.ConnectionString = Configuration.GetSection("AppSettings:SqlServerConnection").Value;
-            //services.AddDbContext<MyContext>(opt => opt.UseSqlServer("Data Source=106.13.125.162;Initial Catalog=MyTestDb;User ID=yuhong;Password=123456"));
+            //services.AddDbContext<MyContext>(opt => opt.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=MyTestDb;User ID=yuhong;Password=123456"));
             services.AddControllers();
             //services.AddSqlsugarSetup();
+            services.AddScoped<ICaching, MemoryCaching>();//记得把缓存注入！！！
             #region Swagger UI Service
 
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;
@@ -47,10 +49,10 @@ namespace CoreProject.API
                 c.SwaggerDoc("V1", new OpenApiInfo
                 {
                     Version = "V1",
-                    Title = $"{ApiName} 接口文档——Netcore 3.0",
+                    Title = $"{ApiName} 接口文档——基于Netcore 3.0",
                     Description = $"{ApiName} HTTP API V1",
-                    Contact = new OpenApiContact { Name = ApiName, Email = "Blog.Core@xxx.com", Url = new Uri("https://www.jianshu.com/u/94102b59cc2a") },
-                    License = new OpenApiLicense { Name = ApiName, Url = new Uri("https://www.jianshu.com/u/94102b59cc2a") }
+                    Contact = new OpenApiContact { Name = ApiName, Email = "hong.yu@finern.com", Url = new Uri("https://www.baidu.com") },
+                    License = new OpenApiLicense { Name = ApiName, Url = new Uri("https://www.baidu.com") }
                 });
                 c.OrderActionsBy(o => o.RelativePath);
                 //系统启动的时候去XML读取注释
@@ -71,8 +73,9 @@ namespace CoreProject.API
             //直接注册某一个类和接口
             //左边的是实现类，右边的As是接口
             builder.RegisterType<ScanInfoServices>().As<IScanInfoServices>();
-            //注册拦截器
+            //注册Log拦截器
             builder.RegisterType<LogAOP>();//将拦截器添加到要注入容器的接口或者类之上
+            builder.RegisterType<CacheAOP>();
             //注册要通过反射创建的组件
             var servicesDllFile = Path.Combine(basePath, "CoreProject.Services.dll");
             var assemblysServices = Assembly.LoadFrom(servicesDllFile);
@@ -81,7 +84,7 @@ namespace CoreProject.API
                       .AsImplementedInterfaces()
                       .InstancePerLifetimeScope()
                       .EnableInterfaceInterceptors()
-                      .InterceptedBy(typeof(LogAOP));//
+                      .InterceptedBy(typeof(LogAOP),typeof(CacheAOP));//放入拦截器集合
             #endregion
         }
 

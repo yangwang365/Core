@@ -4,6 +4,26 @@
         <name>CoreProject.API</name>
     </assembly>
     <members>
+        <member name="M:CoreProject.API.AOP.CacheAOPBase.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            AOP拦截方法
+            </summary>
+            <param name="invocation"></param>
+        </member>
+        <member name="M:CoreProject.API.AOP.CacheAOPBase.CustomCacheKey(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            自定义缓存的key
+            </summary>
+            <param name="invocation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CoreProject.API.AOP.CacheAOPBase.GetArgumentValue(System.Object)">
+            <summary>
+            object转string
+            </summary>
+            <param name="arg"></param>
+            <returns></returns>
+        </member>
         <member name="M:CoreProject.API.AOP.LogAOP.Intercept(Castle.DynamicProxy.IInvocation)">
             <summary>
             实例化IInterceptor唯一方法 

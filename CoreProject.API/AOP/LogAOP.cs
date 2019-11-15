@@ -21,9 +21,15 @@ namespace CoreProject.API.AOP
                 $"【当前执行方法】：{ invocation.Method.Name} \r\n" +
                 $"【携带的参数有】： {string.Join(", ", invocation.Arguments.Select(a => (a ?? "").ToString()).ToArray())} \r\n";
 
+            try
+            {
+                invocation.Proceed();
+            }
+            catch (Exception e)// 执行当前访问的服务方法,(注意:如果下边还有其他的AOP拦截器的话,会跳转到其他的AOP里)
+            {
+                dataIntercept += ($"方法执行中出现异常：{e.Message + e.InnerException}");
+            }
 
-            // 执行当前访问的服务方法,(注意:如果下边还有其他的AOP拦截器的话,会跳转到其他的AOP里)
-            invocation.Proceed();
 
             // 事后处理: 在service被执行了以后,做相应的处理,这里是输出到日志文件
             dataIntercept += ($"【执行完成结果】：{invocation.ReturnValue}");
