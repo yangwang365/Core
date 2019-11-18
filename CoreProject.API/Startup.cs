@@ -17,13 +17,17 @@ using System.Reflection;
 using Autofac.Extras.DynamicProxy;
 using CoreProject.API.AOP;
 using CoreProject.Common.CacheHelper;
+using Microsoft.Extensions.Caching.Memory;
+using System.Collections.Generic;
+using CoreProject.Common.Redis;
+using CoreProject.Common;
 
 namespace CoreProject.API
 {
     public class Startup
     {
         public string ApiName { get; set; } = "CoreProject.API";
-        
+
 
 
         public Startup(IConfiguration configuration)
@@ -32,18 +36,26 @@ namespace CoreProject.API
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.Data Source=server;Initial Catalog=db;User ID=test;Password=test
         public void ConfigureServices(IServiceCollection services)
         {
+            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;
             //BaseDBConfig.ConnectionString = Configuration.GetSection("AppSettings:SqlServerConnection").Value;
             //services.AddDbContext<MyContext>(opt => opt.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=MyTestDb;User ID=yuhong;Password=123456"));
             services.AddControllers();
             //services.AddSqlsugarSetup();
-            services.AddScoped<ICaching, MemoryCaching>();//记得把缓存注入！！！
-            #region Swagger UI Service
-
-            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;
+            //缓存注入
+            services.AddScoped<ICaching, MemoryCaching>();
+            services.AddSingleton<IMemoryCache>(factory =>
+            {
+                var cache = new MemoryCache(new MemoryCacheOptions());
+                return cache;
+            });
+            services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
+            services.AddSingleton(new Appsettings(basePath));
+            //Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("V1", new OpenApiInfo
@@ -61,8 +73,6 @@ namespace CoreProject.API
                 var xmlModelPath = Path.Combine(basePath, "CoreProject.Model.xml");
                 c.IncludeXmlComments(xmlModelPath);
             });
-
-            #endregion
   
         }
 
@@ -75,16 +85,17 @@ namespace CoreProject.API
             builder.RegisterType<ScanInfoServices>().As<IScanInfoServices>();
             //注册Log拦截器
             builder.RegisterType<LogAOP>();//将拦截器添加到要注入容器的接口或者类之上
-            builder.RegisterType<CacheAOP>();
+            builder.RegisterType<MemoryCacheAOP>();
+            builder.RegisterType<RedisCacheAOP>();
             //注册要通过反射创建的组件
             var servicesDllFile = Path.Combine(basePath, "CoreProject.Services.dll");
             var assemblysServices = Assembly.LoadFrom(servicesDllFile);
-
+            List<Type> AOPList =new List<Type> { typeof(LogAOP), typeof(MemoryCacheAOP), typeof(RedisCacheAOP) };
             builder.RegisterAssemblyTypes(assemblysServices)
                       .AsImplementedInterfaces()
                       .InstancePerLifetimeScope()
                       .EnableInterfaceInterceptors()
-                      .InterceptedBy(typeof(LogAOP),typeof(CacheAOP));//放入拦截器集合
+                      .InterceptedBy(AOPList.ToArray());//放入拦截器集合
             #endregion
         }
 
