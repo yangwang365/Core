@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using CoreProject.Common.CacheHelper;
 using CoreProject.IRepository.BASE;
 using CoreProject.Repository.BASE;
 
 namespace CoreProject.Services.BASE
 {
-   public class BaseServices<TEntity>:IBaseRepository<TEntity> where TEntity:class,new ()
+    public class BaseServices<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         public IBaseRepository<TEntity> baseDal = new BaseRepository<TEntity>();
 
@@ -111,6 +112,7 @@ namespace CoreProject.Services.BASE
         /// 作　　者:AZLinli.Blog.Core
         /// </summary>
         /// <returns>数据列表</returns>
+        [Caching(AbsoluteExpiration = 10)]
         public async Task<List<TEntity>> Query()
         {
             return await baseDal.Query();
