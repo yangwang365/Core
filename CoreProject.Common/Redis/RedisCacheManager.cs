@@ -14,7 +14,7 @@ namespace CoreProject.Common.Redis
 
         public RedisCacheManager()
         {
-            string redisConfiguration = Appsettings.app(new string[] { "AppSetings", "RedisCaching", "ConnectionString" });//获取连接字符串
+            string redisConfiguration = Appsettings.app(new string[] { "AppSettings", "RedisCaching", "ConnectionString" });//获取连接字符串
             if (string.IsNullOrWhiteSpace(redisConfiguration))
             {
                 throw new ArgumentException("Redis配置文件为空", nameof(redisConfiguration));
