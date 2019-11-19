@@ -65,5 +65,11 @@
             <param name="id">ID</param>
             <returns></returns>
         </member>
+        <member name="M:CoreProject.API.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac注入
+            </summary>
+            <param name="builder"></param>
+        </member>
     </members>
 </doc>

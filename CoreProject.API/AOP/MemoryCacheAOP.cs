@@ -55,6 +55,10 @@ namespace CoreProject.API.AOP
                     _cache.Set(cacheKey, invocation.ReturnValue);
                 }
             }
+            else
+            {
+                invocation.Proceed();//直接执行被拦截方法
+            }
         }
     }
 }

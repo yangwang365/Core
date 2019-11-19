@@ -27,9 +27,6 @@ namespace CoreProject.API
     public class Startup
     {
         public string ApiName { get; set; } = "CoreProject.API";
-
-
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -74,7 +71,10 @@ namespace CoreProject.API
             });
   
         }
-
+        /// <summary>
+        /// Autofac注入
+        /// </summary>
+        /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
             #region 注入CoreProject.Services，把IScanInfoServices 实例化过程注入到了Autofac容器中
@@ -83,18 +83,22 @@ namespace CoreProject.API
             //左边的是实现类，右边的As是接口
             builder.RegisterType<ScanInfoServices>().As<IScanInfoServices>();
             //注册Log拦截器
-            builder.RegisterType<LogAOP>();//将拦截器添加到要注入容器的接口或者类之上
+            builder.RegisterType<LogAOP>();
             builder.RegisterType<MemoryCacheAOP>();
             builder.RegisterType<RedisCacheAOP>();
-            //注册要通过反射创建的组件
+            //注册Services.dll
             var servicesDllFile = Path.Combine(basePath, "CoreProject.Services.dll");
             var assemblysServices = Assembly.LoadFrom(servicesDllFile);
-            List<Type> AOPList =new List<Type> { typeof(LogAOP), typeof(MemoryCacheAOP), typeof(RedisCacheAOP) };
+            List<Type> AOPList =new List<Type> { typeof(LogAOP), typeof(MemoryCacheAOP), typeof(RedisCacheAOP) };//, typeof(MemoryCacheAOP), typeof(RedisCacheAOP) 
             builder.RegisterAssemblyTypes(assemblysServices)
                       .AsImplementedInterfaces()
                       .InstancePerLifetimeScope()
                       .EnableInterfaceInterceptors()
                       .InterceptedBy(AOPList.ToArray());//放入拦截器集合
+            ////注册Repository.dll（Repository.dll和Services.dll解耦后需要注入）
+            //var repositoryDllFile = Path.Combine(basePath, "CoreProject.Repository.dll");
+            //var assemblysRepository = Assembly.LoadFrom(repositoryDllFile);
+            //builder.RegisterAssemblyTypes(assemblysRepository).AsImplementedInterfaces();
             #endregion
         }
 
