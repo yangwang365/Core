@@ -21,7 +21,7 @@ namespace CoreProject.API
             Host.CreateDefaultBuilder(args)
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())//用于AutoFac，作用把服务和容器添加到项目宿主
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
+                { 
                     webBuilder.UseStartup<Startup>();
                 });
     }
