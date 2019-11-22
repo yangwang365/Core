@@ -11,7 +11,7 @@ using System.IO;
 using CoreProject.Services;
 using CoreProject.IServices;
 using CoreProject.Repository;
-using CoreProject.API.Extensions;
+using CoreProject.Common.Extensions;
 using Autofac;
 using System.Reflection;
 using Autofac.Extras.DynamicProxy;
@@ -36,13 +36,13 @@ namespace CoreProject.API
 
         // This method gets called by the runtime. Use this method to add services to the container.Data Source=server;Initial Catalog=db;User ID=test;Password=test
         public void ConfigureServices(IServiceCollection services)
-        {
+        { 
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;
+            var a = Configuration.GetSections(new string[] { "AppSettings", "RedisCaching", "ConnectionString" });
             //BaseDBConfig.ConnectionString = Configuration.GetSection("AppSettings:SqlServerConnection").Value;
             //services.AddDbContext<MyContext>(opt => opt.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=MyTestDb;User ID=yuhong;Password=123456"));
             services.AddControllers();
             //services.AddSqlsugarSetup();
-            //»º´æ×¢Èë
             services.AddScoped<ICaching, MemoryCaching>();
             services.AddSingleton<IMemoryCache>(factory =>
             {
@@ -51,7 +51,6 @@ namespace CoreProject.API
             });
             services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
             services.AddSingleton(new Appsettings(basePath));
-            //Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("V1", new OpenApiInfo

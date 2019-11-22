@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using CoreProject.Common.Helper;
+using CoreProject.Common.Extensions;
+using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
 namespace CoreProject.Common.Redis
@@ -11,10 +13,14 @@ namespace CoreProject.Common.Redis
         private readonly string redisConnectionString;
         public volatile ConnectionMultiplexer redisConnection;
         private readonly object redisConnectionLock = new object();
-
         public RedisCacheManager()
         {
-            string redisConfiguration = Appsettings.app(new string[] { "AppSettings", "RedisCaching", "ConnectionString" });//获取连接字符串
+
+            IConfiguration configuration = new ConfigurationBuilder() 
+            .AddJsonFile("appsettings.json")
+            .Build();
+            string redisConfiguration = configuration.GetSections(new string[] { "AppSettings", "RedisCaching", "ConnectionString" });
+            //string redisConfiguration = Appsettings.app(new string[] { "AppSettings", "RedisCaching", "ConnectionString" });//获取连接字符串
             if (string.IsNullOrWhiteSpace(redisConfiguration))
             {
                 throw new ArgumentException("Redis配置文件为空", nameof(redisConfiguration));
