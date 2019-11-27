@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CoreProject.Common\CoreProject.Common.csproj" />
     <ProjectReference Include="..\CoreProject.IRepository\CoreProject.IRepository.csproj" />
     <ProjectReference Include="..\CoreProject.IServices\CoreProject.IServices.csproj" />
