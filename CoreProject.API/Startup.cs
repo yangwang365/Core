@@ -21,6 +21,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using CoreProject.Common.Redis;
 using CoreProject.Common;
+using AutoMapper;
 
 namespace CoreProject.API
 {
@@ -68,6 +69,7 @@ namespace CoreProject.API
                 var xmlModelPath = Path.Combine(basePath, "CoreProject.Model.xml");
                 c.IncludeXmlComments(xmlModelPath);
             });
+            services.AddAutoMapper(typeof(Startup));
   
         }
         /// <summary>
@@ -80,7 +82,7 @@ namespace CoreProject.API
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;
             //直接注册某一个类和接口
             //左边的是实现类，右边的As是接口
-            builder.RegisterType<ScanInfoServices>().As<IScanInfoServices>();
+            //builder.RegisterType<ScanInfoServices>().As<IScanInfoServices>();
             //注册Log拦截器
             builder.RegisterType<LogAOP>();
             builder.RegisterType<MemoryCacheAOP>();

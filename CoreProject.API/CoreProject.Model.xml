@@ -4,6 +4,212 @@
         <name>CoreProject.Model</name>
     </assembly>
     <members>
+        <member name="P:CoreProject.Model.Model.Product.pID">
+            <summary>
+            主键
+            </summary>
+            这里之所以没用RootEntity，是想保持和之前的数据库一致，主键是bID，不是Id
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pName">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pContent">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pSubmitter">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pScan">
+            <summary>
+            条形码
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pCategory">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pUpdateTime">
+            <summary> 
+            修改时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pCreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.pRemark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Product.IsDeleted">
+            <summary>
+            逻辑删除
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.IsDeleted">
+             <summary>
+            获取或设置是否禁用，逻辑上的删除，非物理删除
+             </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.Description">
+             <summary>
+            描述
+             </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.OrderSort">
+             <summary>
+            排序
+             </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.Enabled">
+            <summary>
+            是否激活
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.CreateId">
+            <summary>
+            创建ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.CreateBy">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.ModifyId">
+            <summary>
+            修改ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.ModifyBy">
+            <summary>
+            修改者
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.Role.ModifyTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.RootEntity.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uLoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uLoginPWD">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uRealName">
+            <summary>
+            真实姓名
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uStatus">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uRemark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uCreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uUpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uLastErrTime">
+             <summary>
+            最后登录时间 
+             </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.uErrorCount">
+             <summary>
+            错误次数 
+             </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.User.name">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.IsDeleted">
+             <summary>
+            获取或设置是否禁用，逻辑上的删除，非物理删除
+             </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.PersonID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.RoleId">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.CreateId">
+            <summary>
+            创建ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.CreateBy">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.ModifyId">
+            <summary>
+            修改ID
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.ModifyBy">
+            <summary>
+            修改者
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.Model.UserRole.ModifyTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
         <member name="T:CoreProject.Model.ScanInfos">
             <summary>
             条码信息类
@@ -29,87 +235,70 @@
             员工
             </summary>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToInt(System.Object)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pID">
             <summary>
             
             </summary>
-            <param name="thisValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToInt(System.Object,System.Int32)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pName">
             <summary>
-            
+            名称
             </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToMoney(System.Object)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pContent">
             <summary>
-            
+            内容
             </summary>
-            <param name="thisValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToMoney(System.Object,System.Double)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pSubmitter">
             <summary>
-            
+            创建人
             </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToString(System.Object)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pScan">
             <summary>
-            
+            条形码
             </summary>
-            <param name="thisValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToString(System.Object,System.String)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pCategory">
             <summary>
-            
+            类别
             </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToDecimal(System.Object)">
-            <summary>
-            
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pUpdateTime">
+            <summary> 
+            修改时间
             </summary>
-            <param name="thisValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToDecimal(System.Object,System.Decimal)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pCreateTime">
             <summary>
-            
+            创建时间
             </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToDate(System.Object)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.pRemark">
             <summary>
-            
+            备注
             </summary>
-            <param name="thisValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToDate(System.Object,System.DateTime)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.previous">
             <summary>
-            
+            上一篇
             </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
         </member>
-        <member name="M:CoreProject.Model.UtilConvert.ObjToBool(System.Object)">
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.previousID">
             <summary>
-            
+            上一篇id
             </summary>
-            <param name="thisValue"></param>
-            <returns></returns>
+        </member>
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.next">
+            <summary>
+            下一篇
+            </summary>
+        </member>
+        <member name="P:CoreProject.Model.ViewModel.ProductViewModel.nextID">
+            <summary>
+            下一篇id
+            </summary>
         </member>
     </members>
 </doc>

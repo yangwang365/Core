@@ -30,6 +30,11 @@
             </summary>
             <param name="invocation">包含被拦截方法的信息</param>
         </member>
+        <member name="M:CoreProject.API.AutoMapper.CustomProfile.#ctor">
+            <summary>
+            配置构造函数，用来创建关系映射
+            </summary>
+        </member>
         <member name="M:CoreProject.API.Controllers.ScanInfoesController.GetScaninfos">
             <summary>
             获取所有信息列表

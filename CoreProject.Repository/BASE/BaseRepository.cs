@@ -31,7 +31,7 @@ namespace CoreProject.Repository.BASE
         }
         public BaseRepository()
         {
-            DbContext.Init("Data Source=106.13.125.162;Initial Catalog=MyTestDb;User ID=yuhong;Password=123456");
+            DbContext.Init("Data Source=106.54.11.39;Initial Catalog=MyTestDb;User ID=yuhong;Password=123456");
             context = DbContext.GetDbContext();
             db = context.Db;
             entityDB = context.GetEntityDB<TEntity>(db);
